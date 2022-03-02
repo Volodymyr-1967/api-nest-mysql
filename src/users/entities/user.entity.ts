@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-export type UserRoleType = 'admin' | 'editor' | 'ghost';
+export type UserRoleType = 'admin' | 'editor' | 'guest';
 
 @Entity() // { name: 'USERS', database: process.env.DB_DATABASE })
 export class UserEntity {
@@ -14,10 +14,10 @@ export class UserEntity {
   id: number;
 
   @Column()
-  user_name: string;
+  name: string;
 
   @Column()
-  user_email: string;
+  email: string;
 
   @Column({
     type: 'enum',

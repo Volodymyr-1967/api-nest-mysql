@@ -15,7 +15,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     const existEmail = await this.usersRepository.findOne({
-      user_email: createUserDto.email,
+      email: createUserDto.email,
     });
     if (existEmail)
       throw new HttpException(
@@ -24,15 +24,46 @@ export class UsersService {
       );
 
     const newUser = new UserEntity();
-    newUser.user_name = createUserDto.name;
-    newUser.user_email = createUserDto.email;
+    newUser.name = createUserDto.name;
+    newUser.email = createUserDto.email;
     newUser.role = createUserDto.role;
     newUser.updated = new Date();
     return await this.usersRepository.save(newUser);
   }
 
-  async findAll(): Promise<UserEntity[]> {
-    return await this.usersRepository.find();
+  async findAll(dataDest: any, dataSort: any) {
+    if (!dataDest && !dataSort) {
+      dataSort = 'id';
+      dataDest = 'ASC';
+    }
+
+    if (dataSort === 'id')
+      return await this.usersRepository.find({
+        order: {
+          id: dataDest,
+        },
+      });
+
+    if (dataSort === 'name')
+      return await this.usersRepository.find({
+        order: {
+          name: dataDest,
+        },
+      });
+
+    if (dataSort === 'email')
+      return await this.usersRepository.find({
+        order: {
+          email: dataDest,
+        },
+      });
+
+    if (dataSort === 'role')
+      return await this.usersRepository.find({
+        order: {
+          role: dataDest,
+        },
+      });
   }
 
   async findOne(id: number) {
@@ -42,8 +73,8 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     const updateUser = new UserEntity();
     updateUser.id = id;
-    updateUser.user_name = updateUserDto.name;
-    updateUser.user_email = updateUserDto.email;
+    updateUser.name = updateUserDto.name;
+    updateUser.email = updateUserDto.email;
     updateUser.role = updateUserDto.role;
     return await this.usersRepository.save(updateUser);
   }

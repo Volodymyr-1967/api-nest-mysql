@@ -41,6 +41,7 @@ export class UsersService {
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     const updateUser = new UserEntity();
+    updateUser.id = id;
     updateUser.user_name = updateUserDto.name;
     updateUser.user_email = updateUserDto.email;
     updateUser.updated = new Date();

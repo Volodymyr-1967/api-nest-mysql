@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+
+export type UserRoleType = 'admin' | 'editor' | 'ghost';
 
 @Entity() // { name: 'USERS', database: process.env.DB_DATABASE })
 export class UserEntity {
@@ -12,10 +20,15 @@ export class UserEntity {
   user_email: string;
 
   @Column({
-    default: '0000-00-00 00:00:00',
+    type: 'enum',
+    enum: ['admin', 'editor', 'guest'],
+    default: 'guest',
   })
+  role: UserRoleType;
+
+  @CreateDateColumn()
   created: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated: Date;
 }

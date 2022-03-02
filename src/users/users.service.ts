@@ -26,7 +26,7 @@ export class UsersService {
     const newUser = new UserEntity();
     newUser.user_name = createUserDto.name;
     newUser.user_email = createUserDto.email;
-    newUser.created = new Date();
+    newUser.role = createUserDto.role;
     newUser.updated = new Date();
     return await this.usersRepository.save(newUser);
   }
@@ -44,7 +44,7 @@ export class UsersService {
     updateUser.id = id;
     updateUser.user_name = updateUserDto.name;
     updateUser.user_email = updateUserDto.email;
-    updateUser.updated = new Date();
+    updateUser.role = updateUserDto.role;
     return await this.usersRepository.save(updateUser);
   }
 

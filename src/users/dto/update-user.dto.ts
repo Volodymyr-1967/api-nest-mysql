@@ -1,7 +1,3 @@
-import { UserRoleType } from '../entities/user.entity';
+import { CreateUserDto } from './create-user.dto';
 
-export class UpdateUserDto {
-  name: string;
-  email: string;
-  role: UserRoleType;
-}
+export class UpdateUserDto extends CreateUserDto {}

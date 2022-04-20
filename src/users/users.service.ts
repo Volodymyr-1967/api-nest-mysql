@@ -13,20 +13,20 @@ export class UsersService {
     private usersRepository: Repository<UserEntity>,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(userDto: CreateUserDto) {
     const existEmail = await this.usersRepository.findOne({
-      email: createUserDto.email,
+      email: userDto.email,
     });
     if (existEmail)
       throw new HttpException(
-        `Email ${createUserDto.email} already exists`,
+        `Email ${userDto.email} already exists`,
         HttpStatus.CONFLICT,
       );
 
     const newUser = new UserEntity();
-    newUser.name = createUserDto.name;
-    newUser.email = createUserDto.email;
-    newUser.role = createUserDto.role;
+    newUser.name = userDto.name;
+    newUser.email = userDto.email;
+    newUser.role = userDto.role;
     newUser.updated = new Date();
     return await this.usersRepository.save(newUser);
   }

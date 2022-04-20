@@ -8,7 +8,7 @@ import {
 
 export type UserRoleType = 'admin' | 'editor' | 'guest';
 
-@Entity() // { name: 'USERS', database: process.env.DB_DATABASE })
+@Entity()
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;

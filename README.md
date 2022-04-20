@@ -29,3 +29,14 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Start with Docker
+
+```bash
+# building app
+$ docker-compose build
+
+# up
+$ docker-compose up
+```
+

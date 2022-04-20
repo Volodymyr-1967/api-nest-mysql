@@ -36,7 +36,7 @@ $ npm run test:cov
 # building app
 $ docker-compose build
 
-# up
+# up app with db
 $ docker-compose up
 ```
 

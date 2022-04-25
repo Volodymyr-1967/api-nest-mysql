@@ -1,7 +1,6 @@
 version: '3.0'
 
 services:
-
   main:
     container_name: main
     build:
@@ -12,7 +11,7 @@ services:
       - .:/app
       - /app/node_modules
     ports:
-      - "3300:3300"
+      - '3300:3300'
     command: npm run start:dev
     depends_on:
       - db
@@ -27,5 +26,5 @@ services:
       MYSQL_ROOT_PASSWORD: market565
       MYSQL_DATABASE: mydbase
     ports:
-      - "3307:3306"
+      - '3307:3306'
     restart: always

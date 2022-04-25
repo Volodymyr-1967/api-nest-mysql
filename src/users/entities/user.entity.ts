@@ -19,6 +19,9 @@ export class UserEntity {
   @Column()
   email: string;
 
+  @Column({ default: '' })
+  pass_hash: string;
+
   @Column({
     type: 'enum',
     enum: ['admin', 'editor', 'guest'],

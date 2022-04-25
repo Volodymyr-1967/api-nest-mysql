@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcryptjs';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -23,13 +24,37 @@ export class UsersService {
         HttpStatus.CONFLICT,
       );
 
+    const hash = await bcrypt.hash(userDto.password, 10);
+
     const newUser = new UserEntity();
     newUser.name = userDto.name;
     newUser.email = userDto.email;
+    newUser.pass_hash = hash;
     newUser.role = userDto.role;
     newUser.updated = new Date();
     return await this.usersRepository.save(newUser);
   }
+
+  // async login(user: CreateUserDto, jwt: JwtService): Promise<any> {
+  //   const foundUser = await this.usersRepository.findOne({ email: user.email });
+  //   if (foundUser) {
+  //     const { pass_hash } = foundUser;
+  //     if (await bcrypt.compare(user.password, pass_hash)) {
+  //       const payload = { email: user.email };
+  //       return {
+  //         token: jwt.sign(payload),
+  //       };
+  //     }
+  //     return new HttpException(
+  //       'Incorrect username or password',
+  //       HttpStatus.UNAUTHORIZED,
+  //     );
+  //   }
+  //   return new HttpException(
+  //     'Incorrect username or password',
+  //     HttpStatus.UNAUTHORIZED,
+  //   );
+  // }
 
   async findAll(dataDest: any, dataSort: any) {
     if (!dataDest && !dataSort) {

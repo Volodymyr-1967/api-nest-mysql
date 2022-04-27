@@ -1,3 +1,5 @@
+// Сущность для базы данных
+
 import {
   Entity,
   Column,

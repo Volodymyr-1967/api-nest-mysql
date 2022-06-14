@@ -35,27 +35,6 @@ export class UsersService {
     return await this.usersRepository.save(newUser);
   }
 
-  // async login(user: CreateUserDto, jwt: JwtService): Promise<any> {
-  //   const foundUser = await this.usersRepository.findOne({ email: user.email });
-  //   if (foundUser) {
-  //     const { pass_hash } = foundUser;
-  //     if (await bcrypt.compare(user.password, pass_hash)) {
-  //       const payload = { email: user.email };
-  //       return {
-  //         token: jwt.sign(payload),
-  //       };
-  //     }
-  //     return new HttpException(
-  //       'Incorrect username or password',
-  //       HttpStatus.UNAUTHORIZED,
-  //     );
-  //   }
-  //   return new HttpException(
-  //     'Incorrect username or password',
-  //     HttpStatus.UNAUTHORIZED,
-  //   );
-  // }
-
   async findAll(dataDest: any, dataSort: any) {
     if (!dataDest && !dataSort) {
       dataSort = 'id';

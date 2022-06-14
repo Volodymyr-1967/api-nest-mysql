@@ -11,5 +11,3 @@ COPY . .
 COPY ./dist ./dist
 
 CMD ["npm", "run", "start:dev"]
-
-

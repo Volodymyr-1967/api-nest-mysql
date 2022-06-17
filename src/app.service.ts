@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 export class AppService {
   getHello(): object {
     return {
-      message: 'Hello World!',
+      message: 'api-nest-mysql: API + MySQL + Docker',
     };
   }
 }

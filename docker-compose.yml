@@ -1,4 +1,4 @@
-version: '3.0'
+version: '3.9'
 
 services:
   main:
@@ -11,7 +11,7 @@ services:
       - .:/app
       - /app/node_modules
     ports:
-      - '3300:3300'
+      - '3400:3400'
     command: npm run start:dev
     depends_on:
       - db
@@ -25,6 +25,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: market565
       MYSQL_DATABASE: mydbase
+    cap_add:
+      - SYS_NICE
     ports:
       - '3307:3306'
     restart: always

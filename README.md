@@ -34,9 +34,12 @@ $ npm run test:cov
 
 ```bash
 # building app
-$ docker-compose build
+$ docker build .
+
+# building app with db
+$ docker compose build
 
 # up app with db
-$ docker-compose up
+$ docker compose up
 ```
 
